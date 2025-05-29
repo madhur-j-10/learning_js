@@ -7,5 +7,86 @@
 </head>
 <body>
     
+    <button onclick="
+            play_game('rock');
+        ">Rock</button>
+    <button onclick="
+        play_game('paper');
+    ">Paper</button>
+    <button onclick="
+        play_game('scissor');
+    ">Scissors</button>
+
+    <button  onclick="
+        score.wins = 0;
+        score.loses = 0;
+        score.ties = 0;
+        console.log('score has been reset');
+        show_score();
+    ">Reset Score</button>
 </body>
+    <script>
+
+        const score = {
+            wins: 0,
+            loses: 0,
+            ties: 0
+        };
+
+        function show_score(){
+            console.log(`SCORE:\nwins:${score.wins}\nloses:${score.loses}\nties:${score.ties}`);
+        }
+
+        function computer_move(){
+            let a = Math.floor(Math.random()*10);
+            let comp = "";
+            if(a <= 3.33)
+                comp = "rock";
+            else if(a > 3.33 && a <= 6.66)
+                comp = "paper";
+            else
+                comp = "scissor";
+
+            return comp;
+        }
+
+        function play_game(str){
+            let comp = computer_move();
+            let result = "";
+            if(str === 'rock'){
+                if(comp === 'rock')
+                    result = "tie";
+                else if(comp === 'paper')
+                    result = "you lose";
+                else 
+                    result = "you win";
+            }
+            else if(str === 'paper'){
+                if(comp === 'rock')
+                    result = "you win";
+                else if(comp === 'paper')
+                    result = "tie";
+                else 
+                    result = "you lose";
+            }
+            else{
+                if(comp === 'rock')
+                    result = "you lose";
+                else if(comp === 'paper')
+                    result = "you win";
+                else 
+                    result = "tie";
+            }
+            if(result === 'you win')
+                score.wins++;
+            else if(result === 'you lose')
+                score.loses++;
+            else 
+                score.ties++;
+            console.log(`you chose: ${str}\ncomputer chose: ${comp}\n${result}`)
+            show_score();
+        }
+
+        // console.log(computer_move());
+    </script>
 </html>
