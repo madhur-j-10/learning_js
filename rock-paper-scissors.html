@@ -27,11 +27,13 @@
 </body>
     <script>
 
-        const score = {
+        let score = JSON.parse(localStorage.getItem('scores')) || {
             wins: 0,
             loses: 0,
             ties: 0
         };
+
+       
 
         function show_score(){
             console.log(`SCORE:\nwins:${score.wins}\nloses:${score.loses}\nties:${score.ties}`);
@@ -78,15 +80,20 @@
                     result = "tie";
             }
             if(result === 'you win')
-                score.wins++;
+                score.wins += 1;
             else if(result === 'you lose')
-                score.loses++;
+                score.loses += 1;
             else 
-                score.ties++;
-            console.log(`you chose: ${str}\ncomputer chose: ${comp}\n${result}`)
-            show_score();
-        }
+                score.ties += 1;
 
+            localStorage.setItem('scores', JSON.stringify(score));
+            
+            console.log(`you chose: ${str}\ncomputer chose: ${comp}\n${result}`);
+            show_score();
+            
+            
+        }
+        
         // console.log(computer_move());
     </script>
 </html>
