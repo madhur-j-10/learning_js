@@ -4,10 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM practice</title>
+
+    <style>
+        body{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .subscribe-button{
+            border: none;
+            background-color: black;
+            color: white;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+        .is-subscribed{
+            background-color: gray;
+            color: black;
+        }
+        .cost-input{
+            font-size: 15px;
+            /* padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px; */
+            padding: 10px;
+        }
+        .calculate-btn{
+            background-color: green;
+            border: none;
+            color: white;
+            font-size: 15px;
+            padding: 11px 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h3>Youtube subscribe button</h3>
-    <button class="subs-btn" onclick="
+    <button class="subs-btn subscribe-button" onclick="
         subs_btn();
     ">Subscribe</button>
 
@@ -19,13 +57,13 @@
         <br>
         Orders over ₹500 = Free shipping
     </p>
-    <input placeholder="cost of order" class="input-text" onkeydown="
+    <input placeholder="cost of order" class="input-text cost-input" onkeydown="
         onpress_enter(event);
         
     ">
     <button onclick="
         calculateTotal();
-    ">Calculate</button> 
+    " class="calculate-btn">Calculate</button> 
     <p class="final-cost">Final cost:</p>
     
 </body>
@@ -49,10 +87,22 @@
 
         function subs_btn(){
             let btn = document.querySelector('.subs-btn');
-            if(btn.innerText === 'Subscribe')
+            if(btn.innerText === 'Subscribe'){
                 btn.innerText = 'Subscribed';
-            else
+                // document.querySelector('.subscribe-button')
+                // .style.backgroundColor = 'grey';
+                // document.querySelector('.subscribe-button')
+                // .style.color = 'black';
+                btn.classList.add('is-subscribed');
+            }
+            else{
                 btn.innerText = 'Subscribe';
+                // document.querySelector('.subscribe-button')
+                // .style.backgroundColor = 'black';
+                // document.querySelector('.subscribe-button')
+                // .style.color = 'white';
+                btn.classList.remove('is-subscribed');
+            }
 
         }
 
