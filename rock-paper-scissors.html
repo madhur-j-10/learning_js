@@ -23,7 +23,7 @@
     <h4 class="result"></h4>
     <p class="moves"></p>
 
-    <p class="score">wins: 0, loses:0, ties:0</p>
+    <p class="score"></p>
     
 
     <br>
@@ -32,7 +32,7 @@
         score.wins = 0;
         score.loses = 0;
         score.ties = 0;
-        // localStorage.removeItem('score');
+        localStorage.removeItem('scores');
         //console.log('score has been reset');
         show_score();
     ">Reset Score</button>
@@ -55,6 +55,8 @@
           document.querySelector('.score')
             .innerText = `wins:${score.wins}, loses:${score.loses}, ties:${score.ties}`;
         }
+        //for showing current score, after reloading page
+        show_score();
 
         function computer_move(){
             let a = Math.floor(Math.random()*10);
