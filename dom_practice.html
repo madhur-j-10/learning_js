@@ -10,9 +10,43 @@
     <button class="subs-btn" onclick="
         subs_btn();
     ">Subscribe</button>
+
+    <h3>Amazon Shipping Calculator</h3>
+
+    <p>
+        Orders under ₹500 = +₹50 shipping cost
+        <br>
+        <br>
+        Orders over ₹500 = Free shipping
+    </p>
+    <input placeholder="cost of order" class="input-text" onkeydown="
+        onpress_enter(event);
+        
+    ">
+    <button onclick="
+        calculateTotal();
+    ">Calculate</button> 
+    <p class="final-cost">Final cost:</p>
     
 </body>
     <script>
+
+        function onpress_enter(event){
+            if(event.key === 'Enter')
+                calculateTotal();
+        }
+
+        function calculateTotal(){
+            let cost = Number(document.querySelector('.input-text').value);
+            let final = 0;
+            if(cost < 500)
+                final = cost + 50;
+            else 
+                final = cost;
+            document.querySelector('.final-cost')
+            .innerText = `Final cost: ₹${final}`;
+        }
+
         function subs_btn(){
             let btn = document.querySelector('.subs-btn');
             if(btn.innerText === 'Subscribe')
