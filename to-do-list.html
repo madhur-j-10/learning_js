@@ -7,8 +7,11 @@
 </head>
 <body>
     <h3>To Do List</h3>
-    <input type="text" placeholder="Tasks" class="input-txt">
+    <input type="text" placeholder="Tasks" class="input-txt ip-bar">
     <button class="add-btn">Add</button>
+
+    <div class="todo-list"></div>
+
 </body>
     <script>
         
@@ -22,15 +25,43 @@
             inp.value = "";
             //show array
             console.log(todolist);
+            renderhtml();
         }
+
+         function renderhtml(){
+            let insideHtml = "";
+
+            for(let i=0; i<todolist.length; i++){
+
+                const html =   `<p>${todolist[i]}</p>`;
+                insideHtml += html; 
+            }
+
+            // console.log(insideHtml);
+        
+            document.querySelector('.todo-list')
+            .innerHTML = insideHtml;
+        }
+
+
+
         //using addEventListener instead of onclick attribute
         document.querySelector('.add-btn')
         .addEventListener("click", function() {
             addToDo();
-
         });
-       
+        document.querySelector('.ip-bar')
+        .addEventListener("keydown", function(event) {
+            if(event.key === 'Enter')
+                addToDo();
+            // console.log(event.key);
+        });
+
+        renderhtml();
         
+
+       
+
 
     </script>
 </html>
