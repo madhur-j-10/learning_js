@@ -7,11 +7,30 @@
 </head>
 <body>
     <h3>To Do List</h3>
-    <input type="text" placeholder="Tasks">
-    <button>Add</button>
+    <input type="text" placeholder="Tasks" class="input-txt">
+    <button class="add-btn">Add</button>
 </body>
     <script>
+        
         let todolist = [];
+
+        function addToDo(){
+            let inp = document.querySelector('.input-txt');
+            //push the input value to array
+            todolist.push(inp.value);
+            //reset text in text box
+            inp.value = "";
+            //show array
+            console.log(todolist);
+        }
+        //using addEventListener instead of onclick attribute
+        document.querySelector('.add-btn')
+        .addEventListener("click", function() {
+            addToDo();
+
+        });
+       
+        
 
     </script>
 </html>
