@@ -32,7 +32,8 @@
         .score{
             margin-top: 50px;
         }
-        .rst-btn{
+        .rst-btn,
+        .auto-play-btn{
             padding: 10px 15px;
             font-size: 15px;
             border-radius: 10px;
@@ -74,6 +75,10 @@
         show_score();
     " class="rst-btn">Reset Score</button>
 
+    <button class="auto-play-btn" onclick="
+        autoplay();
+    ">Auto Play</button>
+
 
 
 </body>
@@ -84,8 +89,31 @@
             loses: 0,
             ties: 0
         };
+        let isPlaying = false;
+        let intervalID;
+       function autoplay(){
+        if(!isPlaying){
+            intervalID = setInterval(function(){
+            const move = computer_move();
+            play_game(move);
+            }, 1500);//here 1500 is in mili second
+            isPlaying = true;
+        }
+        else{
+            clearInterval(intervalID);
+            isPlaying = false;
+        }
+        if(isPlaying){
+            document.querySelector('.auto-play-btn')
+            .innerText = "Stop Play";
+        }
+        else{
+            document.querySelector('.auto-play-btn')
+            .innerText = "Auto Play";
+        }
 
-       
+            
+       }
 
         function show_score(){
           //  console.log(`SCORE:\nwins:${score.wins}\nloses:${score.loses}\nties:${score.ties}`);
