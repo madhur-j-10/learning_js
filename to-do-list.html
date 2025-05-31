@@ -78,7 +78,7 @@
 
          function renderhtml(){
             let insideHtml = "";
-
+            /*
             for(let i=0; i<todolist.length; i++){
 
                 const html =   `
@@ -92,6 +92,20 @@
                 `;
                 insideHtml += html; 
             }
+            */
+            //using forEach loop instead of normal for loop!
+            todolist.forEach(function(val, i){
+                const html =   `
+                    <div>${todolist[i].task}</div>
+                    <div>${todolist[i].duedate}</div>
+                    <button onclick="
+                            todolist.splice(${i},1);
+                            renderhtml();
+                        " class="delete-btn">Delete</button>   
+                `;
+                insideHtml += html;
+            })
+
             //div
             document.querySelector('.todo-list')
             .innerHTML = insideHtml;
