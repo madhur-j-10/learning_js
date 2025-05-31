@@ -8,21 +8,27 @@
 <body>
     <h3>To Do List</h3>
     <input type="text" placeholder="Tasks" class="input-txt ip-bar">
+    <input type="date" class="due-date">
     <button class="add-btn">Add</button>
 
     <div class="todo-list"></div>
 
 </body>
     <script>
-        
-        let todolist = [];
+        //array of object storing task(key) and duedate(key)
+        let todolist = [
+          
+        ];
 
         function addToDo(){
             let inp = document.querySelector('.input-txt');
-            //push the input value to array
-            todolist.push(inp.value);
-            //reset text in text box
+            let due = document.querySelector('.due-date');
+            //push the input values to array
+            todolist.push({task:inp.value,
+                duedate:due.value});
+            //reset text in text box and calender
             inp.value = "";
+            due.value = "";
             //show array
             console.log(todolist);
             renderhtml();
@@ -33,19 +39,29 @@
 
             for(let i=0; i<todolist.length; i++){
 
-                const html =   `<p>${todolist[i]}</p>`;
+                const html =   `
+                    <p>
+                        ${todolist[i].task}
+                        ${todolist[i].duedate}
+                        <button onclick="
+                            todolist.splice(${i},1);
+                            renderhtml();
+                        ">delete</button>
+                    </p>
+                `;
                 insideHtml += html; 
             }
-
-            // console.log(insideHtml);
-        
+            //div
             document.querySelector('.todo-list')
             .innerHTML = insideHtml;
+
+             console.log(insideHtml);
+
         }
 
 
 
-        //using addEventListener instead of onclick attribute
+        //using addEventListener instead of onclick,onkeydown attribute
         document.querySelector('.add-btn')
         .addEventListener("click", function() {
             addToDo();
@@ -58,10 +74,6 @@
         });
 
         renderhtml();
-        
-
-       
-
 
     </script>
 </html>
