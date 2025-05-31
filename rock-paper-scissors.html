@@ -45,15 +45,9 @@
 <body>
     <h3 class="title">Rock Paper Scissors</h3>
 
-    <button onclick="
-            play_game('rock');
-        " class="move-btn"><img src="images/rock.png" class="move-icon"></button>
-    <button onclick="
-        play_game('paper');
-    " class="move-btn"><img src="images/paper.png" class="move-icon"></button>
-    <button onclick="
-        play_game('scissor');
-    " class="move-btn"><img src="images/scissor.png" class="move-icon"></button>
+    <button class="move-btn play-rock"><img src="images/rock.png" class="move-icon"></button>
+    <button class="move-btn play-paper"><img src="images/paper.png" class="move-icon"></button>
+    <button class="move-btn play-scissor" ><img src="images/scissor.png" class="move-icon"></button>
 
     <br>
     <hr>
@@ -66,14 +60,7 @@
 
     <br>
 
-    <button  onclick="
-        score.wins = 0;
-        score.loses = 0;
-        score.ties = 0;
-        localStorage.removeItem('scores');
-        //console.log('score has been reset');
-        show_score();
-    " class="rst-btn">Reset Score</button>
+    <button class="rst-btn">Reset Score</button>
 
     <button class="auto-play-btn" onclick="
         autoplay();
@@ -93,7 +80,7 @@
         let intervalID;
        function autoplay(){
         if(!isPlaying){
-            intervalID = setInterval(function(){
+            intervalID = setInterval(() => {
             const move = computer_move();
             play_game(move);
             }, 1500);//here 1500 is in mili second
@@ -115,8 +102,18 @@
             
        }
 
+
+        function reset_score(){
+            score.wins = 0;
+            score.loses = 0;
+            score.ties = 0;
+            localStorage.removeItem('scores');
+            //console.log('score has been reset');
+            show_score();
+        }
+
         function show_score(){
-          //  console.log(`SCORE:\nwins:${score.wins}\nloses:${score.loses}\nties:${score.ties}`);
+          
           document.querySelector('.score')
             .innerText = `Wins:${score.wins}, Loses:${score.loses}, Ties:${score.ties}`;
         }
@@ -181,13 +178,38 @@
             .innerHTML = `you: <img src="images/${str}.png" class="move-icon">\ncomputer: <img src="images/${comp}.png" class="move-icon">`;
 
             show_score();
-
-            /*
-            console.log(`you chose: ${str}\ncomputer chose: ${comp}\n${result}`);
-            
-            */
-            
         }
+        //using addEventListerners instead of onclick attribute
+        document.querySelector('.play-rock')
+        .addEventListener("click" , () => {
+            play_game('rock');
+        });
+        document.querySelector('.play-paper')
+        .addEventListener("click" , () => {
+            play_game('paper');
+        });
+        document.querySelector('.play-scissor')
+        .addEventListener("click" , () => {
+            play_game('scissor');
+        });
+        document.querySelector('.rst-btn')
+        .addEventListener("click" , () => {
+            reset_score();
+        });
+
+        document.body
+        .addEventListener('keydown', (event) => {
+            if(event.key === 'r')
+                play_game('rock');
+            else if(event.key === 'p')
+                play_game('paper');
+            else if(event.key === 's')
+                play_game('scissor');
+            else if(event.key === 'a')
+                autoplay();
+            else if(event.key === 'b')
+                reset_score();
+        })
         
   
     </script>
